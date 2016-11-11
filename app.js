@@ -4,6 +4,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var https = require('https');
 var cfenv = require('cfenv');
+var Client = require("ibmiotf");
 var app = express();
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json()); // for parsing application/json
