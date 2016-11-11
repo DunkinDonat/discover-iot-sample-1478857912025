@@ -83,23 +83,22 @@ app.get('/iotServiceLink', function(req, res) {
 	org_req.end();
 });
 
-app.get('/statusSmartphone', function(req, res){
-/*	var appClient = new Client.IotfApplication(appClientConfig);
+var appClient = new Client.IotfApplication(credentials);
 
-    appClient.connect();
+appClient.connect();
 
-    appClient.on("connect", function () {
+appClient.on("connect", function () {
 
-        appClient.subscribeToDeviceEvents("myDeviceType","device01","+","json");
+	appClient.subscribeToDeviceEvents("myDeviceType","device01","+","json");
 
-    });
-    appClient.on("deviceEvent", function (deviceType, deviceId, eventType, format, payload) {
-
-        console.log("Device Event from :: "+deviceType+" : "+deviceId+" of event "+eventType+" with payload : "+payload);
-
-    });*/
-	res.json({});
 });
+appClient.on("deviceEvent", function (deviceType, deviceId, eventType, format, payload) {
+
+	console.log("Device Event from :: "+deviceType+" : "+deviceId+" of event "+eventType+" with payload : "+payload);
+
+});
+
+
 
 app.post('/registerDevice', function(req, res) {
 	console.log(req.body);
