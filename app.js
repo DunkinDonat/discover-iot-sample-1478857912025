@@ -13,6 +13,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 var config = null;
 var credentials = null;
+var myId = "testApplication24";
 var cred =  {
                 "iotCredentialsIdentifier": "a2g6k39sl6r5",
                 "mqtt_host": "180e4v.messaging.internetofthings.ibmcloud.com",
@@ -21,7 +22,8 @@ var cred =  {
                 "http_host": "180e4v.internetofthings.ibmcloud.com",
                 "org": "180e4v",
                 "apiKey": "a-180e4v-v3ngxf3psp",
-                "apiToken": "J@+uWuh?rd6RMIfsX!"
+                "apiToken": "J@+uWuh?rd6RMIfsX!",
+				"id": myId
             };
 if (process.env.VCAP_SERVICES) {
 	config = JSON.parse(process.env.VCAP_SERVICES);
@@ -30,6 +32,7 @@ if (process.env.VCAP_SERVICES) {
 	for (var index in iotService) {
 		if (iotService[index].name === 'discover-iot-try-service') {
 			credentials = iotService[index].credentials;
+			credentials.id = myId;
 		}
 	}
 } else {
