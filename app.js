@@ -22,8 +22,7 @@ var cred =  {
                 "http_host": "180e4v.internetofthings.ibmcloud.com",
                 "org": "180e4v",
                 "apiKey": "a-180e4v-v3ngxf3psp",
-                "apiToken": "J@+uWuh?rd6RMIfsX!",
-				"id": myId
+                "apiToken": "J@+uWuh?rd6RMIfsX!"
             };
 if (process.env.VCAP_SERVICES) {
 	config = JSON.parse(process.env.VCAP_SERVICES);
@@ -154,8 +153,14 @@ app.post('/registerDevice', function(req, res) {
 });
 
 var Client = require("ibmiotf");
+    var appClientConfig = {
+        "org" : credential.org,
+        "id" : myId,
+        "auth-key" : credentials.apiKey,
+        "auth-token" : credentials.apiToken
+    }
 
-var appClient = new Client.IotfApplication(credentials);
+var appClient = new Client.IotfApplication(appClientConfig);
 
 appClient.connect();
 
