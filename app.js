@@ -13,6 +13,16 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 var config = null;
 var credentials = null;
+var cred =  {
+                "iotCredentialsIdentifier": "a2g6k39sl6r5",
+                "mqtt_host": "180e4v.messaging.internetofthings.ibmcloud.com",
+                "mqtt_u_port": 1883,
+                "mqtt_s_port": 8883,
+                "http_host": "180e4v.internetofthings.ibmcloud.com",
+                "org": "180e4v",
+                "apiKey": "a-180e4v-v3ngxf3psp",
+                "apiToken": "J@+uWuh?rd6RMIfsX!"
+            };
 if (process.env.VCAP_SERVICES) {
 	config = JSON.parse(process.env.VCAP_SERVICES);
 
@@ -23,10 +33,10 @@ if (process.env.VCAP_SERVICES) {
 		}
 	}
 } else {
-	console.log("ERROR: IoT Service was not bound!");
+	credentials = cred;
 }
-
 var basicConfig = {
+
 	org: credentials.org,
 	apiKey: credentials.apiKey,
 	apiToken: credentials.apiToken
@@ -72,6 +82,23 @@ app.get('/iotServiceLink', function(req, res) {
 	}).on('error', function(e) { console.log("ERROR", e); });
 	org_req.end();
 });
+
+//app.get('/statusSmartphone', function(req, res){
+	var appClient = new Client.IotfApplication(appClientConfig);
+
+    appClient.connect();
+
+    appClient.on("connect", function () {
+
+        appClient.subscribeToDeviceEvents("myDeviceType","device01","+","json");
+
+    });
+    appClient.on("deviceEvent", function (deviceType, deviceId, eventType, format, payload) {
+
+        console.log("Device Event from :: "+deviceType+" : "+deviceId+" of event "+eventType+" with payload : "+payload);
+
+    });
+//});
 
 app.post('/registerDevice', function(req, res) {
 	console.log(req.body);
