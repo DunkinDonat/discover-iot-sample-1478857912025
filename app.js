@@ -84,7 +84,7 @@ app.get('/iotServiceLink', function(req, res) {
 });
 
 //app.get('/statusSmartphone', function(req, res){
-	var appClient = new Client.IotfApplication(appClientConfig);
+/*	var appClient = new Client.IotfApplication(appClientConfig);
 
     appClient.connect();
 
@@ -97,7 +97,7 @@ app.get('/iotServiceLink', function(req, res) {
 
         console.log("Device Event from :: "+deviceType+" : "+deviceId+" of event "+eventType+" with payload : "+payload);
 
-    });
+    });*/
 //});
 
 app.post('/registerDevice', function(req, res) {
