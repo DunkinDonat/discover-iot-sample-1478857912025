@@ -98,6 +98,7 @@ app.get('/statusSmartphone', function(req, res){
         console.log("Device Event from :: "+deviceType+" : "+deviceId+" of event "+eventType+" with payload : "+payload);
 
     });*/
+	res.json({});
 });
 
 app.post('/registerDevice', function(req, res) {
