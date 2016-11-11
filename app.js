@@ -83,21 +83,6 @@ app.get('/iotServiceLink', function(req, res) {
 	org_req.end();
 });
 
-var appClient = new Client.IotfApplication(credentials);
-
-appClient.connect();
-
-appClient.on("connect", function () {
-
-	appClient.subscribeToDeviceEvents("myDeviceType","device01","+","json");
-
-});
-appClient.on("deviceEvent", function (deviceType, deviceId, eventType, format, payload) {
-
-	console.log("Device Event from :: "+deviceType+" : "+deviceId+" of event "+eventType+" with payload : "+payload);
-
-});
-
 
 
 app.post('/registerDevice', function(req, res) {
@@ -167,4 +152,19 @@ app.post('/registerDevice', function(req, res) {
 
 app.listen(appEnv.port, function() {
 	console.log("server starting on " + appEnv.url);
+});
+
+var appClient = new Client.IotfApplication(credentials);
+
+appClient.connect();
+
+appClient.on("connect", function () {
+
+	appClient.subscribeToDeviceEvents("myDeviceType","device01","+","json");
+
+});
+appClient.on("deviceEvent", function (deviceType, deviceId, eventType, format, payload) {
+
+	console.log("Device Event from :: "+deviceType+" : "+deviceId+" of event "+eventType+" with payload : "+payload);
+
 });
