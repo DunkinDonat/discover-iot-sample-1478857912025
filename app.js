@@ -150,9 +150,6 @@ app.post('/registerDevice', function(req, res) {
 	type_req.end();
 });
 
-app.listen(appEnv.port, function() {
-	console.log("server starting on " + appEnv.url);
-});
 var Client = require("ibmiotf");
 
 var appClient = new Client.IotfApplication(credentials);
@@ -169,3 +166,8 @@ appClient.on("deviceEvent", function (deviceType, deviceId, eventType, format, p
 	console.log("Device Event from :: "+deviceType+" : "+deviceId+" of event "+eventType+" with payload : "+payload);
 
 });
+
+app.listen(appEnv.port, function() {
+	console.log("server starting on " + appEnv.url);
+});
+
